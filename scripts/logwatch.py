@@ -13,14 +13,16 @@ pynotify.init('logwatch')
 from pyinotify import WatchManager, Notifier, ProcessEvent,\
                       EventsCodes
 
-import re
+import os,re
 
 def should_show(line, filepath):
     if 'vodo' in filepath:
         return True
-    if re.search('(python|vodo|dan|oedipa|jamie|nisse)', line, re.I):
+    if re.search('classroom-chat', filepath, re.I):
+        return False
+    if re.search('(python|vodo|dan|oedipa|jamie|nisse|classroom)', line, re.I):
         return True
-    if re.search('(motu|nginx|jquery)', filepath):
+    if re.search('(motu|nginx|jquery|okfn)', filepath):
         return False
     return True
 
@@ -37,6 +39,8 @@ class PTmp(ProcessEvent):
         Inefficient for large files (reads the entire file)
         for efficiency, see http://www.manugarg.com/2007/04/tailing-in-python.html
         """
+        if not os.path.isfile(event.pathname):
+            return #don't let new dirs blow the system
         f = open(event.pathname)
         try:
             lastline = f.readlines()[-1]

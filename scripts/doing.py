@@ -1,4 +1,10 @@
 #!/usr/bin/python
+"""
+Set hamster status from the command-line, and log activities into a text
+file.
+Will doubtles need some tweaking to be useful to anybody except me
+requires http://projecthamster.wordpress.com/
+"""
 
 import hamster.client
 import sys
@@ -7,14 +13,6 @@ from optparse import OptionParser
 storage = hamster.client.Storage()
 
 DONE_FILE = '/home/src/notes/todo/done.txt'
-
-DONE = True
-
-"""
-Set hamster status from the command-line, and log activities into a text
-file.
-Will doubtles need some tweaking to be useful to anybody except me
-"""
 
 
 def get_current_fact():

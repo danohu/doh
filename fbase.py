@@ -12,7 +12,6 @@ def listValues(freebase_type, values = ('name'), limit = 100):
         querydict[value] = None
     results = []
     for item in session.mqlread([querydict]):
-        row = dict((k,v) for k,v in item.iteritems() if k in values)
-        results.append(row)
+        results.append(dict((k,v) for k,v in item.iteritems() if k in values))
     return results
 
