@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Send all files in a given directory to stdout recursively
+# Print the filename for each as a header
+
+
+for filename in `find $1`; do
+    echo -e "--------------------\n$filename\n-------------------"
+    cat "$filename"
+done
+
