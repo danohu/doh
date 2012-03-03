@@ -10,3 +10,11 @@ scripts:
 
 Most of these will probably need some tweaking before use; if you do find anything of use, consider it public domain, and feel free to use it however you like.
 
+
+#PRIVATE: API keys etc
+
+Omitted from this repo is the file private.py, which handles various API keys
+
+from doh.private import SOME_KEY
+
+
