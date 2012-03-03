@@ -9,3 +9,4 @@ parts
 *pyc
 lib
 lib64
+doh/private/*py
