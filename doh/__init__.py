@@ -1,5 +1,9 @@
 import codecs
-import cStringIO
+try:
+    import cStringIO
+except ImportError:
+    # we're on python3, and don't need this faff anyway
+    pass
 import csv
 
 class UnicodeCSVWriter:
@@ -34,3 +38,19 @@ def unicode_csv_writer(filename):
     f = codecs.open(filename, 'w', 'utf-8')
     return UnicodeCSVWriter(f)
 
+
+# decorator to retry a func
+
+def retry(func):
+    def _inner(*args, **kwargs):
+        max_retries = 3
+        retries = 0
+        while True:
+            try:
+                output = func(*args, **kwargs)
+                return output
+            except Exception:
+                retries += 1
+                if retries >= max_retries:
+                    raise
+    return _inner
